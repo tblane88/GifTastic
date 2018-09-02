@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>GifTastic </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <!-- jquery and javascript links -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="assets/javascript/app.js"></script>
+    <!-- bootstrap -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <!-- local stylesheets -->
+    <link rel="stylesheet" type="text/css" media="screen" href="assets/css/style.css" />
+    <script src="assets/javascript/app.js"></script>
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h1>Welcome to GifTastic!</h1>
+            <h5>Click any button to see the gifs.</h5>
+            <h5>Add a button using the search bar on the right.</h5>
+        </div>
+    </div>
+
+    <div class="row">
+        <!-- Where buttons go -->
+        <div class="col-md-8" id="buttonArea">
+
+        </div>
+
+        <!-- where search box will go -->
+        <div class = "col-md-4" id="searchArea">
+                <form id="movie-form">
+                    <label for="character-input">Add a Character from a tv show or movie!</label>
+                    <input type="text" id="character-input"><br>
+                
+                    <!-- Button triggers new movie to be added -->
+                    <input id="add-character" type="submit" value="Search">
+                </form>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12" id="gifArea">
+            
+        </div>
+    </div>
+</div>  
+</body>
+</html>
