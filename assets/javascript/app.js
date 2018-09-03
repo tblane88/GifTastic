@@ -7,7 +7,7 @@ createButtons();
 
 
 
-$(".character-btn").on("click", function() {
+function getGifs() {
     var gifSearch = $(this).attr("data-name");
     var queryURL = "https://api.giphy.com/v1/gifs/search?api_key=x0zNBsY4UorG3vRmgC7fwpuwdzDAb8PV&q=" + gifSearch + "&limit=10&offset=0&rating=PG&lang=en";
 
@@ -45,22 +45,27 @@ $(".character-btn").on("click", function() {
         }
 
     });
-});
+};
 
-function changeGif() {
+$(".character-btn").off("click").on("click", function() {
+    
     var state = $(this).attr("data-state");
     var still = $(this).attr("data-still");
     var active = $(this).attr("data-active");
 
     if(state === 'still') {
+        console.log("once");
         $(this).attr("src", active);
         $(this).attr("data-state", "active");
+        
     } else {
+        console.log("twice");
         $(this).attr("src", still);
         $(this).attr("data-state", "still");
+        
     }
 
-};
+});
 
 
 function createButtons() {
@@ -74,7 +79,19 @@ function createButtons() {
     }
 };
 
-$(document).on("click", ".gif", changeGif);
+$("#add-character").on("click", function(event){
+    event.preventDefault();
+
+    var newCharacter = $("#character-input").val();
+
+    buttons.push(newCharacter);
+
+    createButtons();
+})
+
+// $(document).off("click").on("click", ".gif", changeGif);
+$(document).off("click").on("click", ".character-btn", getGifs);
+// $(".gif").click(changeGif);
 
 
 
