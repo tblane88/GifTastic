@@ -5,10 +5,33 @@ var gifSearch = "";
 
 createButtons();
 
+function changeGif (event) {
+    event.preventDefault();
+    
+    var state = $(this).attr("data-state");
+    var still = $(this).attr("data-still");
+    var active = $(this).attr("data-active");
+
+    if(state === 'still') {
+        console.log("once");
+        $(this).attr("src", active);
+        $(this).attr("data-state", "active");
+        
+    } else {
+        console.log("twice");
+        $(this).attr("src", still);
+        $(this).attr("data-state", "still");
+        
+    }
+
+};
 
 
-function getGifs() {
-    var gifSearch = $(this).attr("data-name");
+
+$(".character-btn").on("click", function (event) {
+    // event.preventDefault();
+   
+     gifSearch = $(this).attr("data-name");
     var queryURL = "https://api.giphy.com/v1/gifs/search?api_key=x0zNBsY4UorG3vRmgC7fwpuwdzDAb8PV&q=" + gifSearch + "&limit=10&offset=0&rating=PG&lang=en";
 
     $.ajax({
@@ -45,27 +68,9 @@ function getGifs() {
         }
 
     });
-};
-
-$(".character-btn").off("click").on("click", function() {
-    
-    var state = $(this).attr("data-state");
-    var still = $(this).attr("data-still");
-    var active = $(this).attr("data-active");
-
-    if(state === 'still') {
-        console.log("once");
-        $(this).attr("src", active);
-        $(this).attr("data-state", "active");
-        
-    } else {
-        console.log("twice");
-        $(this).attr("src", still);
-        $(this).attr("data-state", "still");
-        
-    }
-
 });
+
+
 
 
 function createButtons() {
@@ -79,18 +84,23 @@ function createButtons() {
     }
 };
 
-$("#add-character").on("click", function(event){
+$("#add-character").on("click", function (event){
     event.preventDefault();
+    var inp = $("#character-input");
+    if ((inp.val().length > 0) && (jQuery.inArray(inp.val(), buttons) == -1)) {
+        var newCharacter = $("#character-input").val().trim();
+        $("#character-input").text(" ");
+        buttons.push(newCharacter);
 
-    var newCharacter = $("#character-input").val();
+        createButtons();
+    }
+});
 
-    buttons.push(newCharacter);
+// $(document).off("click").on("click", ".character-btn", getGifs);
+$(document).off("click").on("click", ".gif", changeGif);
+// $(document).off("click").on("click", "#add-character", addCharacter);
 
-    createButtons();
-})
 
-// $(document).off("click").on("click", ".gif", changeGif);
-$(document).off("click").on("click", ".character-btn", getGifs);
 // $(".gif").click(changeGif);
 
 
