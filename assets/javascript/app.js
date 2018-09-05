@@ -5,6 +5,7 @@ var gifSearch = "";
 
 createButtons();
 
+// function to start and stop the gif
 function changeGif (event) {
     event.preventDefault();
     
@@ -27,7 +28,7 @@ function changeGif (event) {
 };
 
 
-
+// function to get gifs from the button that is clicked.
 $(".character-btn").on("click", function (event) {
     // event.preventDefault();
    
@@ -72,7 +73,7 @@ $(".character-btn").on("click", function (event) {
 
 
 
-
+// function to create buttons
 function createButtons() {
     // clear the button area before making new buttons
     $("#buttonArea").empty();
@@ -84,6 +85,7 @@ function createButtons() {
     }
 };
 
+// function to add a new character to the button array 
 $("#add-character").on("click", function (event){
     event.preventDefault();
     var inp = $("#character-input");
@@ -95,6 +97,7 @@ $("#add-character").on("click", function (event){
         createButtons();
     }
 });
+
 
 // $(document).off("click").on("click", ".character-btn", getGifs);
 $(document).off("click").on("click", ".gif", changeGif);
