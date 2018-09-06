@@ -6,8 +6,7 @@ var gifSearch = "";
 createButtons();
 
 // function to start and stop the gif
-function changeGif (event) {
-    event.preventDefault();
+$(document).off("click").on("click", ".gif", function () {
     
     var state = $(this).attr("data-state");
     var still = $(this).attr("data-still");
@@ -25,22 +24,23 @@ function changeGif (event) {
         
     }
 
-};
+});
 
 
 // function to get gifs from the button that is clicked.
-$(".character-btn").on("click", function (event) {
+function getGifs () {
     // event.preventDefault();
+
    
      gifSearch = $(this).attr("data-name");
     var queryURL = "https://api.giphy.com/v1/gifs/search?api_key=x0zNBsY4UorG3vRmgC7fwpuwdzDAb8PV&q=" + gifSearch + "&limit=10&offset=0&rating=PG&lang=en";
-
+    console.log("character button clicked");
     $.ajax({
         url: queryURL,
         method: "GET"
     }).then(function(response) {
         var results = response.data;
-
+        console.log("added gifs");
         for(g=0; g < results.length; g++) {
 
             if(results[g].rating !== "r" && results[g].rating !== "pg-13") {
@@ -69,7 +69,7 @@ $(".character-btn").on("click", function (event) {
         }
 
     });
-});
+};
 
 
 
@@ -86,12 +86,15 @@ function createButtons() {
 };
 
 // function to add a new character to the button array 
-$("#add-character").on("click", function (event){
+$("#add-character").off("click").on("click", function (event){
     event.preventDefault();
+    // event.stopPropagation()
+
+    console.log("added Character")
     var inp = $("#character-input");
     if ((inp.val().length > 0) && (jQuery.inArray(inp.val(), buttons) == -1)) {
         var newCharacter = $("#character-input").val().trim();
-        $("#character-input").text(" ");
+        inp.val(" ");
         buttons.push(newCharacter);
 
         createButtons();
@@ -99,8 +102,8 @@ $("#add-character").on("click", function (event){
 });
 
 
-// $(document).off("click").on("click", ".character-btn", getGifs);
-$(document).off("click").on("click", ".gif", changeGif);
+$(document).on("click", ".character-btn", getGifs);
+// $(document).off("click").on("click", ".gif", changeGif);
 // $(document).off("click").on("click", "#add-character", addCharacter);
 
 
